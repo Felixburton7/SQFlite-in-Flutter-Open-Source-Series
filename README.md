@@ -13,11 +13,11 @@ Welcome to **SQFlite in Flutter**, part of my open-source series to help develop
 
 ## Screenshots
 
-### Light Mode
-![Light Mode](assets/images/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-09-07%20at%2015.25.31.png)
-
 ### Dark Mode
 ![Dark Mode](assets/images/simulator_screenshot_206DA7F9-034E-42AA-B5F9-F9776952FAE1.png)
+
+### Light Mode
+![Light Mode](assets/images/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-09-07%20at%2015.25.31.png)
 
 
 ## Getting Started
