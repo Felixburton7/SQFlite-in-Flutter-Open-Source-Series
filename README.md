@@ -11,13 +11,14 @@ Welcome to **SQFlite in Flutter**, part of my open-source series to help develop
 
 ---
 
-## Demo Video
+## Screenshots
 
-Here's a short demo of the app in action:
+### Light Mode
+![Light Mode](assets/images/screenshot1.png)
 
-[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](Simulator-Screen-Recording-iPhone-15-2024-09-07-at-14.34.40)
+### Dark Mode
+![Dark Mode](assets/images/screenshot2.png)
 
----
 
 ## Getting Started
 
