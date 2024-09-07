@@ -31,6 +31,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // Main entry point for the Flutter application.
       title: 'Blog Manager', // Title of the app.
 
