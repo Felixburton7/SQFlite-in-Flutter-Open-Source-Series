@@ -12,11 +12,7 @@ Welcome to **SQFlite in Flutter**, part of my open-source series to help develop
 ---
 ## Screenshots
 
-<p float="left">
-  <img src="![Dark Mode](assets/images/simulator_screenshot_206DA7F9-034E-42AA-B5F9-F9776952FAE1.png)" width="50%" />
-  <img src="path_to_your_image/simulator_screenshot_206DA7F9-034E-42AA-B5F9-F9776952FAE1.png" width="50%" />
-</p>
-
+<p float="left"> <img src="assets/images/simulator_screenshot_206DA7F9-034E-42AA-B5F9-F9776952FAE1.png" width="45%" /> <img src="assets/images/Simulator Screenshot - iPhone 15 - 2024-09-07 at 15.25.31.png" width="45%" /> </p>
 ## Screenshots
 
 ### Dark Mode
