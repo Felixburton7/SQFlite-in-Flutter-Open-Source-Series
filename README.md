@@ -1,7 +1,3 @@
-Here is the `README.md` file for your project, including all necessary instructions and a section for embedding your video:
-
----
-
 # SQFlite in Flutter: Open Source Learning Series
 
 Welcome to **SQFlite in Flutter**, part of my open-source series to help developers learn the fundamentals of working with SQL databases in Flutter. This project covers essential concepts such as creating and interacting with an SQLite database, dynamically changing themes (light and dark mode), and building a blog manager using Flutter.
