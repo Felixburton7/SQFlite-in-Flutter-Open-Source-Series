@@ -4,7 +4,8 @@ import 'package:persist_data_example_sqlite/core/theme_extensions.dart';
 class Navdrawer extends StatelessWidget {
   final bool isDarkMode;
   final Function(bool) onThemeChanged;
-  final VoidCallback deleteAllBlogs;
+  final VoidCallback
+      deleteAllBlogs; //Used here as it is void (takes no parameters)
 
   const Navdrawer({
     super.key,

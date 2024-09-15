@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:persist_data_example_sqlite/core/theme_extensions.dart'; // Theme extensions for Spotify theme.
 import 'package:persist_data_example_sqlite/data/datasources/datasource.dart'; // Data source for SQLite database operations.
 import 'package:persist_data_example_sqlite/data/models/blog_model.dart'; // Blog model representing the blog object.
-import 'package:persist_data_example_sqlite/presentation/pages/navdrawer.dart';
+import 'package:persist_data_example_sqlite/presentation/widgets/blog_list.dart';
+import 'package:persist_data_example_sqlite/presentation/widgets/navdrawer.dart';
 import 'package:persist_data_example_sqlite/presentation/widgets/blog_card.dart'; // Widget to display each blog post in a card.
 
 class MyHomePage extends StatefulWidget {
@@ -154,6 +155,55 @@ class _MyHomePageState extends State<MyHomePage>
     _animationController.reverse(); // Hide the form with animation.
   }
 
+  // Building the UI.
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_showAllBlogs ? 'All Blogs' : 'Most Recent Post'),
+        actions: [
+          IconButton(
+            icon: Icon(_showAllBlogs ? Icons.filter_list : Icons.list),
+            onPressed: () {
+              setState(() {
+                _showAllBlogs =
+                    !_showAllBlogs; //Logical operator to turn TRUE to FALSE & vice versa.
+              });
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            BlogList(
+              showAllBlogs: _showAllBlogs,
+              blogs: _blogs,
+              deleteBlog: _deleteBlog, // Pass the delete function
+              editBlog: _editBlog, // Pass the edit function
+            ),
+
+            _showTextFields
+                ? _buildBlogForm() //Example of ternary operator.
+                : Container(), // Show the form if _showTextFields is true, otherwise show an empty container.
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleTextFields,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+      drawer: Navdrawer(
+        isDarkMode: widget.isDarkMode,
+        onThemeChanged: widget.onThemeChanged,
+        deleteAllBlogs: _deleteAllBlogs,
+      ),
+    );
+  }
+
   // Build the form for creating or updating a blog post.
   Widget _buildBlogForm() {
     return SizeTransition(
@@ -261,52 +311,5 @@ class _MyHomePageState extends State<MyHomePage>
                   ),
                 ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _showAllBlogs
-                ? 'All Blogs'
-                : 'Most Recent Post', // Change title based on view.
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(_showAllBlogs
-                  ? Icons.filter_list
-                  : Icons.list), // Toggle icon for filtering.
-              onPressed: () {
-                setState(() {
-                  _showAllBlogs =
-                      !_showAllBlogs; // Toggle between all blogs and most recent.
-                });
-              },
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              _buildBlogList(), // Display the list of blogs.
-              if (_showTextFields) _buildBlogForm(), // Show the form if needed.
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed:
-              _toggleTextFields, // Toggle form visibility on button press.
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          child:
-              const Icon(Icons.add, color: Colors.white), // Add icon for FAB.
-        ),
-        // Smaller Drawer using FractionallySizedBox to control the width
-        drawer: Navdrawer(
-          isDarkMode: widget.isDarkMode,
-          onThemeChanged: widget.onThemeChanged,
-          deleteAllBlogs: _deleteAllBlogs,
-        ));
   }
 }
