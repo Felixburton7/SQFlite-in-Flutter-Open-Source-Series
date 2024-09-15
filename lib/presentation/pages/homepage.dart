@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:persist_data_example_sqlite/core/theme_extensions.dart'; // Theme extensions for Spotify theme.
 import 'package:persist_data_example_sqlite/data/datasources/datasource.dart'; // Data source for SQLite database operations.
 import 'package:persist_data_example_sqlite/data/models/blog_model.dart'; // Blog model representing the blog object.
+import 'package:persist_data_example_sqlite/presentation/pages/navdrawer.dart';
 import 'package:persist_data_example_sqlite/presentation/widgets/blog_card.dart'; // Widget to display each blog post in a card.
 
 class MyHomePage extends StatefulWidget {
@@ -265,101 +266,47 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _showAllBlogs
-              ? 'All Blogs'
-              : 'Most Recent Post', // Change title based on view.
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(_showAllBlogs
-                ? Icons.filter_list
-                : Icons.list), // Toggle icon for filtering.
-            onPressed: () {
-              setState(() {
-                _showAllBlogs =
-                    !_showAllBlogs; // Toggle between all blogs and most recent.
-              });
-            },
+        appBar: AppBar(
+          title: Text(
+            _showAllBlogs
+                ? 'All Blogs'
+                : 'Most Recent Post', // Change title based on view.
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildBlogList(), // Display the list of blogs.
-            if (_showTextFields) _buildBlogForm(), // Show the form if needed.
+          actions: [
+            IconButton(
+              icon: Icon(_showAllBlogs
+                  ? Icons.filter_list
+                  : Icons.list), // Toggle icon for filtering.
+              onPressed: () {
+                setState(() {
+                  _showAllBlogs =
+                      !_showAllBlogs; // Toggle between all blogs and most recent.
+                });
+              },
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleTextFields, // Toggle form visibility on button press.
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: const Icon(Icons.add, color: Colors.white), // Add icon for FAB.
-      ),
-      // Smaller Drawer using FractionallySizedBox to control the width
-      drawer: Drawer(
-        child: FractionallySizedBox(
-          child: ListView(
-            padding: EdgeInsets.zero,
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
             children: [
-              // Drawer header
-              Container(
-                height: 100, // Height for the header.
-                decoration: const BoxDecoration(color: spotifyGreen),
-                child: const Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        15, 0, 0, 15), // Padding for positioning the title.
-                    child: Text(
-                      'Additional',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: const Text('Features'),
-              ),
-              ListTile(
-                title: const Text(
-                    'Delete All Blogs'), // Option to delete all blogs.
-                leading: const Icon(Icons.delete), // Trash icon.
-                onTap: () {
-                  Navigator.pop(context); // Close the drawer.
-                  _deleteAllBlogs(); // Delete all blogs.
-                },
-              ),
-              const Divider(),
-              // Light/Dark mode switch
-              ListTile(
-                title: const Text('Dark Mode'), // Toggle dark mode.
-                trailing: Switch(
-                  value: widget.isDarkMode, // Show current theme mode.
-                  onChanged: (bool value) {
-                    widget.onThemeChanged(
-                        value); // Toggle between light and dark modes.
-                  },
-                ),
-              ),
-              const Divider(),
-              ListTile(
-                leading: const Icon(Icons.waving_hand), // Hand wave icon.
-                title: const Text('Hi I\'m Felix'),
-                subtitle: const Text(
-                    'A Full Stack Software Developer'), // About section.
-              ),
+              _buildBlogList(), // Display the list of blogs.
+              if (_showTextFields) _buildBlogForm(), // Show the form if needed.
             ],
           ),
         ),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed:
+              _toggleTextFields, // Toggle form visibility on button press.
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          child:
+              const Icon(Icons.add, color: Colors.white), // Add icon for FAB.
+        ),
+        // Smaller Drawer using FractionallySizedBox to control the width
+        drawer: Navdrawer(
+          isDarkMode: widget.isDarkMode,
+          onThemeChanged: widget.onThemeChanged,
+          deleteAllBlogs: _deleteAllBlogs,
+        ));
   }
 }
